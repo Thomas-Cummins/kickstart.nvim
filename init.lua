@@ -129,6 +129,9 @@ vim.o.smartcase = true
 -- Keep signcolumn on by default
 vim.o.signcolumn = 'yes'
 
+-- Disable line wrap
+vim.o.wrap = false
+
 -- Decrease update time
 vim.o.updatetime = 250
 
