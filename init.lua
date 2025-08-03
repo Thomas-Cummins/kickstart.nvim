@@ -722,6 +722,10 @@ require('lazy').setup({
       require('mason-tool-installer').setup { ensure_installed = ensure_installed }
 
       require('mason-lspconfig').setup {
+        require('lspconfig')['gdscript'].setup {
+          name = 'godot',
+          cmd = vim.lsp.rpc.connect('127.0.0.1', 6005),
+        },
         ensure_installed = {}, -- explicitly set to an empty table (Kickstart populates installs via mason-tool-installer)
         automatic_installation = false,
         handlers = {
