@@ -784,6 +784,10 @@ require('lazy').setup({
 
       -- After configuring our language servers, we now enable them
       require('mason-lspconfig').setup {
+        require('lspconfig')['gdscript'].setup {
+          name = 'godot',
+          cmd = vim.lsp.rpc.connect('127.0.0.1', 6005),
+        },
         ensure_installed = {}, -- explicitly set to an empty table (Kickstart populates installs via mason-tool-installer)
         automatic_enable = true, -- automatically run vim.lsp.enable() for all servers that are installed via Mason
       }
