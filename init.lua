@@ -775,17 +775,12 @@ require('lazy').setup({
         -- Structure is identical to the mason table from above.
         others = {
           -- dartls = {},
+          gdscript = {
+            name = 'godot',
+            cmd = vim.lsp.rpc.connect('127.00.0.1', 6005),
+          },
         },
       }
-
-      -- The following loop will configure each server with the capabilities we defined above.
-      -- This will ensure that all servers have the same base configuration, but also
-      -- allow for server-specific overrides.
-      for server_name, server_config in pairs(servers) do
-        server_config.capabilities = vim.tbl_deep_extend('force', {}, capabilities, server_config.capabilities or {})
-        vim.lsp.config(server_name, server_config)
-        vim.lsp.enable(server_name)
-      end
 
       -- Ensure the servers and tools above are installed
       --
@@ -817,10 +812,6 @@ require('lazy').setup({
 
       -- After configuring our language servers, we now enable them
       require('mason-lspconfig').setup {
-        require('lspconfig')['gdscript'].setup {
-          name = 'godot',
-          cmd = vim.lsp.rpc.connect('127.0.0.1', 6005),
-        },
         ensure_installed = {}, -- explicitly set to an empty table (Kickstart populates installs via mason-tool-installer)
         automatic_enable = true, -- automatically run vim.lsp.enable() for all servers that are installed via Mason
       }
