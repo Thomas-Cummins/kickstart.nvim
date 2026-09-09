@@ -1,5 +1,26 @@
 # kickstart.nvim
 
+## Personal setup
+
+Requires **Neovim 0.12+**. Tree-sitter settings live in
+`lua/custom/plugins/treesitter.lua`; add languages to `treesitter-parsers.json`.
+
+On non-Nix systems:
+
+- Install Git, a C compiler, `tar`, `curl`, and `tree-sitter-cli` 0.26.1+
+  (not the npm version).
+- Install Node.js/npm so Mason can install `markdownlint`, or provide
+  `markdownlint-cli` yourself.
+- Run `:Lazy sync` once to migrate Tree-sitter to `main`, then restart.
+  Use `:Lazy update` afterward. Parsers install automatically on startup.
+
+On NixOS, Home Manager supplies packages and reads the same parser list.
+Its generated `lua/nix-deps.lua` is optional and gitignored; don't copy it to
+other machines or use `:TSInstall`/`:TSUpdate` on NixOS.
+
+To deploy to NixOS: commit and push this repo, run `nix flake update nvim-config`
+in the NixOS repo, rebuild, and restart Neovim.
+
 ## Introduction
 
 A starting point for Neovim that is:

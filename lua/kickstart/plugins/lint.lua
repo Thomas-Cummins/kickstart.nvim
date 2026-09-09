@@ -53,7 +53,11 @@ return {
           -- avoid superfluous noise, notably within the handy LSP pop-ups that
           -- describe the hovered symbol using Markdown.
           if vim.bo.modifiable then
-            lint.try_lint()
+            if vim.bo.filetype == 'markdown' and vim.fn.executable 'markdownlint' == 0 then
+              vim.notify_once('Markdown linting needs markdownlint-cli. Install it with :Mason or your package manager.', vim.log.levels.WARN)
+            else
+              lint.try_lint()
+            end
           end
         end,
       })
